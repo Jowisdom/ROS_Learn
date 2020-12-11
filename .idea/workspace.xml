@@ -237,7 +237,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/urdf_sim_tutorial" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -1181,12 +1181,12 @@
       <workItem from="1607526617113" duration="26000" />
       <workItem from="1607526714525" duration="706000" />
       <workItem from="1607527434655" duration="387000" />
-      <workItem from="1607527835899" duration="42890000" />
+      <workItem from="1607527835899" duration="43159000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48125000" />
+    <option name="totallyTimeSpent" value="48394000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1200,7 +1200,7 @@
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="2293" height="1292" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15768375" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15768375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1211,7 +1211,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32996634" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.2003367" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.2003367" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32996634" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.32996634" />

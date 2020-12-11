@@ -1,0 +1,119 @@
+<?xml version = "1.0"?>
+<robot name = "test">
+    <link name = "base_link">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+            <geometry>
+                <box size = "1 1 0.2"/>
+            </geometry>
+            <material name = "red">
+                <color rgba = "1 0.2 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name = "left_front_wheel_joint" type = "continuous">
+        <origin xyz = "0.4 0.55 0" rpy = "0 0 0"/>
+        <parent link = "base_link"/>
+        <child link = "left_front_wheel_link"/>
+        <axis xyz = "0 1 0"/>
+    </joint>
+
+
+    <link name = "left_front_wheel_link">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "1.57 0 0"/>
+            <geometry>
+                <cylinder length = "0.1" radius = "0.2" />
+            </geometry>
+            <material name = "green">
+                <color rgba = "0 0.8 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name = "right_front_wheel_joint" type = "continuous">
+        <origin xyz = "0.4 -0.55 0" rpy = "0 0 0"/>
+        <parent link = "base_link"/>
+        <child link = "right_front_wheel_link"/>
+        <axis xyz = "0 1 0"/>
+    </joint>
+
+
+    <link name = "right_front_wheel_link">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "1.57 0 0"/>
+            <geometry>
+                <cylinder length = "0.1" radius = "0.2"/>
+            </geometry>
+            <material name = "green">
+                <color rgba = "0 0.8 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name = "left_back_wheel_joint" type = "continuous">
+        <origin xyz = "-0.4 0.55 0" rpy = "0 0 0"/>
+        <parent link = "base_link"/>
+        <child link = "left_back_wheel_link"/>
+        <axis xyz = "0 1 0"/>
+    </joint>
+
+
+    <link name = "left_back_wheel_link">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "1.57 0 0"/>
+            <geometry>
+                <cylinder length = "0.1" radius = "0.2" />
+            </geometry>
+            <material name = "green">
+                <color rgba = "0 0.8 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name = "right_back_wheel_joint" type = "continuous">
+        <origin xyz = "-0.4 -0.55 0" rpy = "0 0 0"/>
+        <parent link = "base_link"/>
+        <child link = "right_back_wheel_link"/>
+        <axis xyz = "0 1 0"/>
+    </joint>
+
+
+    <link name = "right_back_wheel_link">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "1.57 0 0"/>
+            <geometry>
+                <cylinder length = "0.1" radius = "0.2"/>
+            </geometry>
+            <material name = "green">
+                <color rgba = "0 0.8 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <link name = "kinect_link">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "0 0 1.5708"/>
+            <geometry>
+                <mesh filename = "package://learn_model/meshes/kinect.dae"/>
+                <!-- <box size = "0.6 0.1 0.2"/> -->
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name = "kinect_joint" type = "revolute">
+        <origin xyz ="0.45 0 0.11 " rpy = "0 0 0 "/>
+        <parent link = "base_link"/>
+        <child link = "kinect_link"/>
+        <axis xyz = "0 0 1"/>
+        <limit effort="10.0" lower="-1.570" upper="1.57" velocity="0.5"/>
+    </joint>
+    <!-- <joint name = "kinect_joint" type = "fixed">
+        <origin xyz ="0.4 0 0.1 " rpy = "0 0 0 "/>
+        <parent link = "base_link"/>
+        <child link = "kinect_link"/>
+ 
+    </joint> -->
+</robot>
+

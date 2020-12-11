@@ -1,0 +1,225 @@
+<?xml version = "1.0"?>
+<robot name = "test" xmlns:xacro = "http://www.ros.org/wiki/xacro">
+
+    <xacro:property name = "M_PI" value = "3.1415926"/>
+    <xacro:property name = "base_mass" value="20"/>
+    <xacro:property name = "base_box_length" value="0.8"/>
+    <xacro:property name = "base_box_width" value="0.6"/>
+    <xacro:property name = "base_box_height" value="0.15"/>
+    <xacro:property name = "wheel_mass" value="1"/>
+    <xacro:property name = "wheel_length" value="0.1"/>
+    <xacro:property name = "wheel_radius" value="0.15"/>
+    <!--定义轮子-->
+    <xacro:macro name = "wheel_link" params="wheel_name length radius">
+        <link name = "${wheel_name}">
+            <visual>
+                <origin xyz = "0 0 0 " rpy = "${M_PI/2} 0 0"/>
+                <geometry>
+                    <cylinder length = "${length}" radius = "${radius}" />
+                </geometry>
+                <material name = "green">
+                    <color rgba = "0 0.8 0 1"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz = "0 0 0 " rpy = "${M_PI/2} 0 0"/>
+                <geometry>
+                    <cylinder length = "${length}" radius = "${radius}" />
+                </geometry>
+                <material name = "green">
+                    <color rgba = "0 0.8 0 1"/>
+                </material>
+            </collision>
+            <inertial>
+                <mass value = "${wheel_mass}"/>
+                <origin xyz="0 0 0"/>
+                <inertia ixx = "${0.1*wheel_mass*(3*wheel_radius*wheel_radius+wheel_length*wheel_length)}"
+                         ixy = "0"
+                         ixz = "0"
+                         iyy = "${0.1*wheel_mass*(3*wheel_radius*wheel_radius+wheel_length*wheel_length)}"
+                         iyz = "0"
+                         izz = "${0.5*wheel_mass*wheel_radius*wheel_radius}"/>
+            </inertial>
+
+        </link>
+        <gazebo reference = "${wheel_name}">
+            <material>Gazebo/Black</material>
+        </gazebo>
+
+
+    </xacro:macro>
+
+    <!--定义轮子的关节-->
+    <xacro:macro name = "wheel_joint" params ="joint_name parent child x y z">
+        <joint name = "${joint_name}" type = "continuous">
+            <origin xyz = "${x} ${y} ${z}" rpy = "0 0 0"/>
+            <parent link = "${parent}"/>
+            <child link = "${child}"/>
+            <axis xyz = "0 1 0"/>
+        </joint>
+        <!-- Transmission is important to link the joints and the controller -->
+        <transmission name="${joint_name}_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="{joint_name}" />
+            <actuator name="{joint_name}_motor">
+                <hardwareInterface>VelocityJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+    </xacro:macro>
+
+    <!--添加车轮及其关节-->
+    <xacro:macro name = "add_wheel_link_joint" params = "wheel_name parent x_joint y_joint z_joint ">
+        <wheel_link wheel_name = "${wheel_name}_link" length = "${wheel_length}" radius = "${wheel_radius}" />
+        <wheel_joint joint_name = "${wheel_name}_joint" parent = "${parent}" child = "${wheel_name}_link" x="${x_joint}"
+                     y="${y_joint}" z = "${z_joint}"/>
+
+    </xacro:macro>
+
+
+
+    <link name = "base_link">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+            <geometry>
+                <box size = "${base_box_length} ${base_box_width} ${base_box_height}"/>
+            </geometry>
+            <material name = "red">
+                <color rgba = "1 0.2 0 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+            <geometry>
+                <box size = "${base_box_length} ${base_box_width} ${base_box_height}"/>
+            </geometry>
+            <material name = "red">
+                <color rgba = "1 0.2 0 1"/>
+            </material>
+        </collision>
+
+        <inertial>
+            <mass value = "${base_mass}"/>
+            <origin xyz="0 0 0"/>
+            <inertia ixx = "${0.1*base_mass*(base_box_height*base_box_height+base_box_length*base_box_length)}"
+                     ixy = "0"
+                     ixz = "0"
+                     iyy = "${0.1*base_mass*(base_box_length*base_box_length+base_box_width*base_box_width)}"
+                     iyz = "0"
+                     izz = "${0.1*base_mass*(base_box_height*base_box_height+base_box_width*base_box_width)}"/>
+        </inertial>
+    </link>
+    <gazebo reference = "base_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <add_wheel_link_joint wheel_name = "left_front_wheel" parent = "base_link" y_joint = "${base_box_width/2 + wheel_length/2}"
+                          x_joint="${base_box_length/2 - 0.1}" z_joint="0"/>
+
+    <add_wheel_link_joint wheel_name = "left_back_wheel" parent = "base_link" y_joint = "${base_box_width/2 + wheel_length/2}"
+                          x_joint="${-base_box_length/2 + 0.1}" z_joint="0"/>
+
+    <add_wheel_link_joint wheel_name = "right_front_wheel" parent = "base_link" y_joint = "${-base_box_width/2 - wheel_length/2}"
+                          x_joint="${base_box_length/2 - 0.1}" z_joint="0"/>
+
+    <add_wheel_link_joint wheel_name = "right_back_wheel" parent = "base_link" y_joint = "${-base_box_width/2 - wheel_length/2}"
+                          x_joint="${-base_box_length/2 + 0.1}" z_joint="0"/>
+
+    <!--    <link name = "kinect_link">-->
+    <!--        <visual>-->
+    <!--            <origin xyz = "0 0 0" rpy = "0 0 1.5708"/>-->
+    <!--            <geometry>-->
+    <!--                <mesh filename = "package://learn_model/meshes/kinect.dae"/>-->
+    <!--                &lt;!&ndash; <box size = "0.6 0.1 0.2"/> &ndash;&gt;-->
+    <!--            </geometry>-->
+    <!--        </visual>-->
+    <!--        <collision>-->
+    <!--            <geometry>-->
+    <!--                <box size="0.07 0.3 0.09"/>-->
+    <!--            </geometry>-->
+    <!--        </collision>-->
+    <!--    </link>-->
+
+    <!--    <joint name = "kinect_joint" type = "revolute">-->
+    <!--        <origin xyz ="${base_box_length/2-0.05} 0 ${base_box_height/2+0.01} " rpy = "0 0 0 "/>-->
+    <!--        <parent link = "base_link"/>-->
+    <!--        <child link = "kinect_link"/>-->
+    <!--        <axis xyz = "0 0 1"/>-->
+    <!--        <limit effort="10.0" lower="-1.570" upper="1.57" velocity="0.5"/>-->
+    <!--    </joint>-->
+
+    <!--    <transmission name="kinect_joint_trans">-->
+    <!--        <type>transmission_interface/SimpleTransmission</type>-->
+    <!--        <joint name="kinect_joint" />-->
+    <!--        <actuator name="kinect_joint_motor">-->
+    <!--            <hardwareInterface>VelocityJointInterface</hardwareInterface>-->
+    <!--            <mechanicalReduction>1</mechanicalReduction>-->
+    <!--        </actuator>-->
+    <!--    </transmission>-->
+
+    <gazebo reference="base_footprint">
+        <turnGravityoff>false</turnGravityoff>
+    </gazebo>
+
+
+    <!-- controller -->
+    <gazebo>
+        <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+            <updateRate>100.0</updateRate>
+            <robotNamespace>/</robotNamespace>
+            <leftFrontJoint>left_front_wheel_joint</leftFrontJoint>
+            <rightFrontJoint>right_front_wheel_joint</rightFrontJoint>
+            <leftRearJoint>left_back_wheel_joint</leftRearJoint>
+            <rightRearJoint>right_back_wheel_joint</rightRearJoint>
+            <wheelSeparation>${base_box_width}</wheelSeparation>
+            <wheelDiameter>${2*wheel_radius}</wheelDiameter>
+            <robotBaseFrame>base_link</robotBaseFrame>
+            <torque>20</torque>
+            <topicName>cmd_vel</topicName>
+            <broadcastTF>true</broadcastTF>
+        </plugin>
+    </gazebo>
+
+    <!--    <gazebo>-->
+    <!--        <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">-->
+    <!--            <rosDebugLevel>Debug</rosDebugLevel>-->
+    <!--            <publishWheelTF>true</publishWheelTF>-->
+    <!--            <robotNamespace>/</robotNamespace>-->
+    <!--            <publishTf>1</publishTf>-->
+    <!--            <publishWheelJointState>true</publishWheelJointState>-->
+    <!--            <alwaysOn>true</alwaysOn>-->
+    <!--            <updateRate>100.0</updateRate>-->
+    <!--            <legacyMode>true</legacyMode>-->
+    <!--            <leftJoint>right_front_wheel_joint</leftJoint>-->
+    <!--            <rightJoint>left_front_wheel_joint</rightJoint>-->
+    <!--            <wheelSeparation>${base_box_width}</wheelSeparation>-->
+    <!--            <wheelDiameter>${2*wheel_radius}</wheelDiameter>-->
+    <!--            <broadcastTF>1</broadcastTF>-->
+    <!--            <wheelTorque>30</wheelTorque>-->
+    <!--            <wheelAcceleration>1.8</wheelAcceleration>-->
+    <!--            <commandTopic>cmd_vel</commandTopic>-->
+    <!--            <odometryFrame>odom</odometryFrame>-->
+    <!--            <odometryTopic>odom</odometryTopic>-->
+    <!--            <robotBaseFrame>base_footprint</robotBaseFrame>-->
+    <!--        </plugin>-->
+    <!--    </gazebo>-->
+
+
+
+    <!--    添加相机-->
+    <xacro:include filename="$(find learn_model)/urdf/rplidar.xacro" />
+
+    <!-- Attach the Kinect -->
+    <joint name="rplidar_joint" type="fixed">
+        <origin xyz="${base_box_length/2-0.05} 0 ${base_box_height/2+0.01} " rpy="0 0 0" />
+        <parent link="base_link"/>
+        <child link="rplidar_link"/>
+    </joint>
+
+    <xacro:rplidar prefix="rplidar"/>
+
+</robot>
+

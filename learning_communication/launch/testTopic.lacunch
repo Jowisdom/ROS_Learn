@@ -1,0 +1,6 @@
+<?xml version = "1.0"?>
+<launch>
+    <node name = "talker" pkg = "learning_communication" type = "talker"/>
+    <node name = "listener" pkg = "learning_communication" type = "listener"/>
+
+</launch>

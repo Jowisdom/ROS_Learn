@@ -1,0 +1,87 @@
+<?xml version = "1.0"?>
+<robot name = "test" xmlns:xacro = "http://www.ros.org/wiki/xacro">
+
+    <xacro:property name = "M_PI" value = "3.1415926"/>
+    <xacro:property name = "base_box_length" value="0.8"/>
+    <xacro:property name = "base_box_width" value="0.6"/>
+    <xacro:property name = "base_box_height" value="0.15"/>
+    <xacro:property name = "wheel_length" value="0.1"/>
+    <xacro:property name = "wheel_radius" value="0.15"/>
+    <!--定义轮子-->
+    <xacro:macro name = "wheel_link" params="wheel_name length radius">
+        <link name = "${wheel_name}">
+            <visual>
+                <origin xyz = "0 0 0 " rpy = "${M_PI/2} 0 0"/>
+                <geometry>
+                    <cylinder length = "${length}" radius = "${radius}" />
+                </geometry>
+                <material name = "green">
+                    <color rgba = "0 0.8 0 1"/>
+                </material>
+            </visual>
+        </link>
+    </xacro:macro>
+
+    <!--定义轮子的关节-->
+    <xacro:macro name = "wheel_joint" params ="joint_name parent child x y z">
+        <joint name = "${joint_name}" type = "continuous">
+            <origin xyz = "${x} ${y} ${z}" rpy = "0 0 0"/>
+            <parent link = "${parent}"/>
+            <child link = "${child}"/>
+            <axis xyz = "0 1 0"/>
+        </joint>
+    </xacro:macro>
+
+    <!--添加车轮及其关节-->
+    <xacro:macro name = "add_wheel_link_joint" params = "wheel_name parent x_joint y_joint z_joint ">
+        <wheel_link wheel_name = "${wheel_name}_link" length = "${wheel_length}" radius = "${wheel_radius}" />
+        <wheel_joint joint_name = "${wheel_name}_joint" parent = "${parent}" child = "${wheel_name}_link" x="${x_joint}"
+                     y="${y_joint}" z = "${z_joint}"/>
+    </xacro:macro>
+
+
+
+    <link name = "base_link">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+            <geometry>
+                <box size = "${base_box_length} ${base_box_width} ${base_box_height}"/>
+            </geometry>
+            <material name = "red">
+                <color rgba = "1 0.2 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <add_wheel_link_joint wheel_name = "left_front_wheel" parent = "base_link" y_joint = "${base_box_width/2 + wheel_length/2}"
+                          x_joint="${base_box_length/2 - 0.1}" z_joint="0"/>
+
+    <add_wheel_link_joint wheel_name = "left_back_wheel" parent = "base_link" y_joint = "${base_box_width/2 + wheel_length/2}"
+                          x_joint="${-base_box_length/2 + 0.1}" z_joint="0"/>
+
+    <add_wheel_link_joint wheel_name = "right_front_wheel" parent = "base_link" y_joint = "${-base_box_width/2 - wheel_length/2}"
+                          x_joint="${base_box_length/2 - 0.1}" z_joint="0"/>
+
+    <add_wheel_link_joint wheel_name = "right_back_wheel" parent = "base_link" y_joint = "${-base_box_width/2 - wheel_length/2}"
+                          x_joint="${-base_box_length/2 + 0.1}" z_joint="0"/>
+
+    <link name = "kinect_link">
+        <visual>
+            <origin xyz = "0 0 0" rpy = "0 0 1.5708"/>
+            <geometry>
+                <mesh filename = "package://learn_model/meshes/kinect.dae"/>
+                <!-- <box size = "0.6 0.1 0.2"/> -->
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name = "kinect_joint" type = "revolute">
+        <origin xyz ="${base_box_length/2-0.05} 0 ${base_box_height/2+0.01} " rpy = "0 0 0 "/>
+        <parent link = "base_link"/>
+        <child link = "kinect_link"/>
+        <axis xyz = "0 0 1"/>
+        <limit effort="10.0" lower="-1.570" upper="1.57" velocity="0.5"/>
+    </joint>
+
+</robot>
+

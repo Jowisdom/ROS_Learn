@@ -35,9 +35,9 @@
       <config projectName="Project" targetName="rosgraph_msgs_generate_messages_nodejs" />
       <config projectName="Project" targetName="learning_communication_genlisp" />
       <config projectName="Project" targetName="actionlib_generate_messages_eus" />
+      <config projectName="Project" targetName="roscpp_generate_messages_nodejs" />
       <config projectName="Project" targetName="rosgraph_msgs_generate_messages_eus" />
       <config projectName="Project" targetName="control_toolbox_generate_messages_py" />
-      <config projectName="Project" targetName="roscpp_generate_messages_nodejs" />
       <config projectName="Project" targetName="server" />
       <config projectName="Project" targetName="download_extra_data" />
       <config projectName="Project" targetName="control_msgs_generate_messages_eus" />
@@ -52,8 +52,8 @@
       <config projectName="Project" targetName="learning_communication_generate_messages_lisp" />
       <config projectName="Project" targetName="bond_generate_messages_cpp" />
       <config projectName="Project" targetName="actionlib_msgs_generate_messages_py" />
-      <config projectName="Project" targetName="talker" />
       <config projectName="Project" targetName="sensor_msgs_generate_messages_eus" />
+      <config projectName="Project" targetName="talker" />
       <config projectName="Project" targetName="std_msgs_generate_messages_lisp" />
       <config projectName="Project" targetName="dynamic_reconfigure_generate_messages_py" />
       <config projectName="Project" targetName="actionlib_generate_messages_cpp" />
@@ -130,14 +130,14 @@
       <config projectName="Project" targetName="_learning_communication_generate_messages_check_deps_Person" />
       <config projectName="Project" targetName="nodelet_generate_messages_nodejs" />
       <config projectName="Project" targetName="nav_msgs_generate_messages_nodejs" />
-      <config projectName="Project" targetName="gazebo_msgs_generate_messages_eus" />
       <config projectName="Project" targetName="trajectory_msgs_generate_messages_nodejs" />
+      <config projectName="Project" targetName="gazebo_msgs_generate_messages_eus" />
       <config projectName="Project" targetName="roscpp_generate_messages_lisp" />
       <config projectName="Project" targetName="learning_communication_gennodejs" />
       <config projectName="Project" targetName="mrobot_description_xacro_generated_to_devel_space_" />
       <config projectName="Project" targetName="geometry_msgs_generate_messages_eus" />
-      <config projectName="Project" targetName="learn_model_xacro_generated_to_devel_space_" />
       <config projectName="Project" targetName="tf_generate_messages_py" />
+      <config projectName="Project" targetName="learn_model_xacro_generated_to_devel_space_" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -157,14 +157,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ebc7ded4-172f-4273-8b9d-1065266b94cf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/robot_vision/data/haar_detectors/haarcascade_frontalface_alt.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/robot_vision/data/haar_detectors/haarcascade_profileface.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/robot_vision/launch/face_detector.launch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/robot_vision/launch/motion_detector.launch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/robot_vision/src/face_detector.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/robot_vision/src/motion_detector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/robot_vision/usb_camera_calibration.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/robot_vision/usb_camera_calibration.yaml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/../build/" />
@@ -179,7 +172,17 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/robot_vision/launch/usb_cam.launch">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -233,8 +236,36 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="src" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="47feb1d3:ProjectViewModuleNode" />
+            </path>
+            <path>
+              <item name="src" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="src" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="robot_vision" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="src" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="robot_vision" type="462c0819:PsiDirectoryNode" />
+              <item name="launch" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -244,7 +275,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -1124,7 +1155,8 @@
       <workItem from="1607944825169" duration="80000" />
       <workItem from="1607944920973" duration="242000" />
       <workItem from="1607945165172" duration="152000" />
-      <workItem from="1607945662161" duration="803000" />
+      <workItem from="1607945662161" duration="1875000" />
+      <workItem from="1607960619087" duration="630000" />
     </task>
     <task id="LOCAL-00001" summary="robot_vision">
       <created>1607753272648</created>
@@ -1140,11 +1172,18 @@
       <option name="project" value="LOCAL" />
       <updated>1607772278068</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="robot_vision">
+      <created>1607946652574</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1607946652574</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68007000" />
+    <option name="totallyTimeSpent" value="69709000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1156,9 +1195,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="2293" height="1292" extended-state="6" />
+    <frame x="64" y="-11" width="2295" height="1300" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16570155" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16703786" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1169,7 +1208,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32996634" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.29377106" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.2929293" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32996634" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.27441078" />
@@ -1465,6 +1504,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/robot_vision/src/cv_bridge_test.py">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="23" column="45" lean-forward="true" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
+          <folding>
+            <element signature="e#47#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="live-pycharm">
         <state>
           <first_editor>
@@ -1476,19 +1523,11 @@
           <second_editor />
         </state>
       </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="23" column="45" lean-forward="true" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
-          <folding>
-            <element signature="e#47#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/robot_vision/launch/usb_cam.launch">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="11" selection-end-column="9" />
+        <state relative-caret-position="209">
+          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
         </state>
       </provider>
     </entry>
